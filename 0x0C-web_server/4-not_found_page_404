@@ -6,10 +6,10 @@ echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
 config="#comment \n\tlocation /redirect_me {\n\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}\n\n"
 
-sed -i "22 i ${config}" default.txt
+sed -i "22 i ${config}" /etc/nginx/sites-available/default
 
 config2="#404 \n\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /home/ubuntu;\n\t\tinternal;\n\t}"
 
-sed -i "26 i ${config2}" default.txt
+sed -i "26 i ${config2}" /etc/nginx/sites-available/default
 
 service nginx restart
