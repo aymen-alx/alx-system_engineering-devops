@@ -13,7 +13,7 @@ format="server {
     }
 }"
 
-config="#comment \n\tserver {\n\tlisten 80;\n\tserver_name example.com;\n\n\tlocation /redirect_me {\n\t\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t\t}\n\t}"
+config="#comment \n\tlisten 80;\n\tserver_name example.com;\n\n\tlocation /redirect_me {\n\t\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t\t}"
 
 sed -i "22 i ${config}" /etc/nginx/sites-enabled/default
 
