@@ -12,4 +12,6 @@ config2="#404 \n\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot 
 
 sed -i "26 i ${config2}" /etc/nginx/sites-available/default
 
+echo "Ceci n'est pas une page\n" > /home/ubuntu/404.html
+
 service nginx restart
