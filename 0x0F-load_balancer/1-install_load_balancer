@@ -18,6 +18,7 @@ backend web-backend
 
 frontend http
     bind *:80
+    mode tcp
      
     default_backend web-backend
 "
