@@ -20,4 +20,4 @@ if __name__ == '__main__':
         name, done_tasks, total_tasks))
     for task in todos:
         if task.get('completed') is True:
-            print('    ', task.get('title'))
+            print('\t', task.get('title'))
