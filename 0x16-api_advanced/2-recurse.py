@@ -3,15 +3,26 @@
 import requests
 
 
-def recurse(subreddit, hot_list=[], count=0, after=None):
-    """Fetches all the hot posts from a subreddit recursively"""
-    url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
+def recurse(subreddit, hot_list=[], after=None):
+    """Recursively fetch all the hot posts from a subreddit"""
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    params = {"limit": 100, "after": after}
     headers = {"User-Agent": "My-User-Agent"}
+    response = requests.get(url, params=params, headers=headers,
+                            allow_redirects=False)
 
-    response = requests.get(url, headers=headers, allow_redirects=False)
+    if response.status_code != 200:
+        return None
 
-    if response.status_code >= 300:
-        print("None")
-    else:
-        for post in response.json().get("data").get("children"):
-            print(post.get("data").get("title"))
+    data = response.json().get("data")
+    if not data:
+        return hot_list
+
+    posts = [child.get("data").get("title") for child in data.get("children")]
+    hot_list.extend(posts)
+
+    after = data.get("after")
+    if not after:
+        return hot_list
+
+    return recurse(subreddit, hot_list, after)
