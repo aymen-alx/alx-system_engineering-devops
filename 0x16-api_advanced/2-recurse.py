@@ -3,7 +3,7 @@
 import requests
 
 
-def recurse(subreddit, hot_list=[])
+def recurse(subreddit, hot_list=[]):
     """Recursively fetch all the hot posts from a subreddit"""
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     params = {"count": count, "after": after}
