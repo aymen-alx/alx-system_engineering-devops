@@ -3,13 +3,16 @@
 import requests
 
 
-def recurse(subreddit, hot_list=[]):
-    """Recursively fetch all the hot posts from a subreddit"""
+def recurse(subreddit, hot_list=[], count=0, after=None):
+    """Fetch all the hot posts from a subreddit"""
+
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     params = {"count": count, "after": after}
     headers = {"User-Agent": "My-User-Agent"}
+
     response = requests.get(url, params=params, headers=headers,
                             allow_redirects=False)
+
     if response.status_code >= 400:
         return None
 
