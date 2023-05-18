@@ -1,11 +1,12 @@
 # Configure nginx limit
 
-exec { 'configure hard file':
-  path    => '/bin',
-  command => "sed -i 's/5/4096/' /etc/security/limits.conf"
+exec { 'increase-hard-file-limit-for-holberton-user':
+  command => 'sed -i "/holberton hard/s/5/50000/" /etc/security/limits.conf',
+  path    => '/usr/local/bin/:/bin/'
 }
 
-exec { 'configure hard file':
-  path    => '/bin',
-  command => "sed -i 's/4/4096/' /etc/security/limits.conf"
+# Increase soft file limit for Holberton user.
+exec { 'increase-soft-file-limit-for-holberton-user':
+  command => 'sed -i "/holberton soft/s/4/50000/" /etc/security/limits.conf',
+  path    => '/usr/local/bin/:/bin/'
 }
