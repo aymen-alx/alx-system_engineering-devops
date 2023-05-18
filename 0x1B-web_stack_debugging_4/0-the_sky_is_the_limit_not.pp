@@ -5,10 +5,10 @@ $replacement = 'ULIMIT="-n 4096"'
 
 file { $file_path:
   ensure  => present,
-#  content => file($file_path).content.gsub(/ULIMIT="-n \d+"/, $replacement),
+  content => file($file_path).content.gsub(/ULIMIT='-n \d+'/, $replacement),
 }
 
 exec { 'nginx-restart':
   command => 'nginx restart',
-  path    => '/etc/init.d/'
+  path    => '/etc/init.d/',
 }
