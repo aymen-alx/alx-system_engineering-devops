@@ -1,11 +1,7 @@
 # Configure nginx limit and restart it
 
-$file_path = '/etc/default/nginx'
-$replacement = 'ULIMIT="-n 4096"'
-
-file { $file_path:
-  ensure  => present,
-  content => file($file_path).content.gsub(/ULIMIT='-n \d+'/, $replacement),
+exec { 'replace_ulimit':
+  command => "sed -i 's/^ULIMIT=\"-n 15\"$/ULIMIT=\"-n 4096\"/' /etc/default/nginx",
 }
 
 exec { 'nginx-restart':
